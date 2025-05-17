@@ -31,35 +31,41 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     for (const T &x : v) out << x << ' '; 
     return out;
 }
+void Solve() {
+    ll n;
+    cin >> n;
+    string s;
 
-void Solve(){
-    int n;
-    cin>>n;
-    vector<int> v(n);
-    cin>>v;
+    cout << "mul 9" << endl;
+    cout.flush();
+    cin >> s;
+    if (s == "-1") exit(0);
+    int i=0;
+    while(i<2) {
+        cout << "digit" << endl;
+        cout.flush();
+        cin >> s;
+        if (s == "-1") exit(0);
+        i++;
+    }
 
-    
-    unordered_map<int,int> mp;
-    for(int i=0;i<n;i++){
-        mp[v[i]]++;
-    }
-    if(mp.size() >=3)
-    cout<<"No"<<endl;
-    else{
-       sort(v.begin(),v.end());
-       int a = mp[v[0]];
-       int b = mp[v[n-1]];
-       if(abs(a-b) <=1)
-       cout<<"Yes"<<endl;
-       else
-       cout<<"No"<<endl;
-    }
+    ll x = n - 9;
+    cout << "add " << x << endl;
+    cout.flush();
+    cin >> s;
+    if (s == "-1") exit(0);
+
+    cout << "!" << endl;
+    cout.flush();
+    cin >> s;
+    if (s == "-1") exit(0);
 }
+
 
 int main(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     int test_cases = 1;
-     cin >> test_cases;
+    cin >> test_cases;
     for(int tc = 1; tc <= test_cases; tc++){
         // cout << "Case #" << tc << ": ";
         Solve();

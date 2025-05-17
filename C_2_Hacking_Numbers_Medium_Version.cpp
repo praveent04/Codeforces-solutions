@@ -33,18 +33,37 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
 }
 
 void Solve(){
-    int n,k;
-    cin>>n>>k;
-    vector<int> v(n);
-    cin>>v;
+        ll n;
+        cin >> n;
+        string s;
 
-    for(int i=0;i<n;i++){
-        if(v[i]==k){
-            cout<<"Yes"<<endl;
-            return;
+        cout << "mul 9" << endl;
+        cout.flush();
+        cin >> s;
+        if (s == "-1") exit(0);
+ 
+
+        int i=0;
+        while(i<2) {
+        cout << "digit" << endl;
+        cout.flush();
+        cin>> s;
+        if(s == "-1") exit(0);
+        i++;
         }
-    }
-    cout<<"NO"<<endl;
+
+        ll x = n-9;
+        cout << "add " <<x<<endl;
+        cout.flush();
+        cin >> s;
+        if (s == "-1") exit(0);
+ 
+        cout <<"!"<<endl;
+        cout.flush();
+        cin>>s;
+        if (s == "-1") exit(0);
+    
+
 }
 
 int main(){

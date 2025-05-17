@@ -32,20 +32,25 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     return out;
 }
 
-void Solve(){
-    vector<vector<char>> v(10, vector<char>(10));
-    cin>>v;
-
-    int cnt =0;
-    for(int i=0;i<10;i++){
-        for(int j=0;j<10;j++){
-            if(v[i][j]=='X'){
-                cnt += 1+ min(i,min(j,min(9-i,9-j)));
-            }
-        }
-    }
-    cout<<cnt<<endl;
+ll cl2(ll x){
+    if(x <= 1) return 0;
+    return 64 - __builtin_clzll(x - 1);
 }
+
+void Solve() {
+    ll n,m,a,b;
+    cin>>n>>m>>a>>b;
+    
+    ll mini = min(a, n - a + 1);
+    ll maxi = min(b, m - b + 1);
+    ll c1 = cl2(m) + cl2(mini);
+    ll c2 = cl2(n) + cl2(maxi);
+    c1 = 1+ c1;
+    c2 = 1+c2;
+    int x = min(c1, c2);
+    cout <<x<<endl;
+}
+
 
 int main(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
