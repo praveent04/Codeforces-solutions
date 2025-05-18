@@ -34,57 +34,24 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
 
 void Solve(){
     int n;
-        cin >> n;
-        int m = n - 1;
-        vector<int> a(n + 1);
-        for (int i = 1; i <= n; i++) {
-            cin >> a[i];
-        }
-        vector<int> ass(m + 1, -1);
-        vector<vector<int>> imp(m + 1);
-        vector<pair<int, bool>> un;
-        for (int i = 1; i <= n; i++) {
-            if (a[i] == 0) {
-                if (i > 1) un.emplace_back(i - 1, true);
-                if (i < n) un.emplace_back(i, false);
-            } else {
-                if (i == 1) {
-                    un.emplace_back(1, true);
-                } else if (i == n) {
-                    un.emplace_back(n - 1, false);
-                } else {
-                    imp[i - 1].push_back(i);
-                }
+    cin>>n;
+    vector<int> v(n);
+    cin>>v;
+
+    int sum = accumulate(v.begin(),v.end(),0);
+    if(sum>=n){
+        cout<<"YES"<<endl;
+        return;
+    }
+    else{
+        for(int i=1;i<n;i++){
+            if(v[i] == v[i-1] && v[i]==0){
+                cout<<"YES"<<endl;
+                return;
             }
         }
-        
-        deque<pair<int, bool>> dq;
-        for (auto &u: un) dq.push_back(u);
-        bool bad = false;
-        while (!dq.empty() && !bad) {
-            auto p = dq.front();
-            dq.pop_front();
-            int v = p.first;
-            bool val = p.second;
-            if (ass[v] != -1) {
-                if (ass[v] != (val ? 1 : 0)) {
-                    bad = true;
-                }
-                continue;
-            }
-            ass[v] = val ? 1 : 0;
-            if (val) {
-                for (int to : imp[v]) {
-                    dq.emplace_back(to, true);
-                }
-            }
-        }
-        if(bad){
-            cout<<"YES"<<endl;
-        }
-        else{
-            cout<<"NO"<<endl;
-        }
+    }
+    cout<<"NO"<<endl;
         
 }
 
