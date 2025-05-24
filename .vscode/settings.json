@@ -19,6 +19,7 @@
         "future": "cpp",
         "istream": "cpp",
         "utility": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "random": "cpp"
     }
 }
