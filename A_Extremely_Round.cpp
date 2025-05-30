@@ -33,60 +33,13 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
 }
 
 void Solve(){
-    int n, k;
-    cin >> n >> k;
-    vector<int> v(n);
-    cin >> v;
     
-    if(k==4) {
-        int cnt = 0;
-        int temp =0;
-        int ans =0;
-        for(int i=0;i<n;i++){
-            if(v[i]%4==0){
-                cout<<0<<endl;
-                return;
-            }
-            if(v[i]%2==0) cnt++;
-            else temp++;
-            if((v[i]+1)%4==0){
-                cout<<ans<<endl;
-                return;
-            }
-        }
-        if(cnt>=2) {
-            cout<<0<<endl;
-            return;
-        }
-        if(cnt==1 && temp){
-            cout<<1<<endl;
-            return;
-        }
-        else if(cnt==0 && temp >=2){
-            cout<<2<<endl;
-            return;
-        }
-        else if(cnt==0 && temp%4==0){
-            cout<<0<<endl;
-            return;
-        }
-    } else {
-        int mini = INT_MAX;
-        for (int x : v) {
-            if (x % k == 0) {
-                cout << 0 << '\n';
-                return;
-            }
-            mini = min(mini, k - x % k);
-        }
-        cout << mini << endl;
-    }
 }
 
 int main(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     int test_cases = 1;
-     cin >> test_cases;
+    // cin >> test_cases;
     for(int tc = 1; tc <= test_cases; tc++){
         // cout << "Case #" << tc << ": ";
         Solve();
