@@ -33,21 +33,9 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
 }
 
 void Solve(){
-    int n;
-    cin>>n;
-    vector<int> v(n);
-    cin>>v;
-    for(int i=1;i<n;i++){
-        if(v[i] < v[i-1]){
-            cout<<0<<endl;
-            return;
-        }
-    }
-    int mini = INT_MAX;
-    for(int i=1;i<n;i++){
-        mini = min(mini, v[i]-v[i-1]);
-    }
-    cout<< mini/2 +1 << endl;
+    int n,k,x;
+    cin>>n>>k>>x;
+    
 }
 
 int main(){
