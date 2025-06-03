@@ -33,53 +33,54 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
 }
 
 void Solve(){
-    int n, k;
-    cin >> n >> k;
+    int n,k;
+    cin>>n>>k;
     vector<int> v(n);
-    cin >> v;
-    
-    if(k==4) {
-        int cnt = 0;
-        int temp =0;
-        int ans =0;
+    cin>>v;
+    if(k==4){
+        int a =0;
+        int b = INT_MAX;
+        int c =0;
         for(int i=0;i<n;i++){
-            if(v[i]%4==0){
+            int rem = v[i]%4;
+            if(rem==0){
                 cout<<0<<endl;
                 return;
             }
-            if(v[i]%2==0) cnt++;
-            else temp++;
-            if((v[i]+1)%4==0){
-                cout<<ans<<endl;
-                return;
+            if(v[i]%2==1){
+                a++;
+            }else if(v[i]%2==0){
+                c++;
             }
+            b = min(b,4-rem);
         }
-        if(cnt>=2) {
+        if(c>=2){
             cout<<0<<endl;
-            return;
         }
-        if(cnt==1 && temp){
+        else if(a>0 && c>0){
             cout<<1<<endl;
-            return;
         }
-        else if(cnt==0 && temp >=2){
+        else if(b==1){
+            cout<<1<<endl;
+        }
+        else if(a>=2){
             cout<<2<<endl;
-            return;
         }
-        else if(cnt==0 && temp%4==0){
-            cout<<0<<endl;
-            return;
+        else{
+            cout<<b<<endl;
         }
-    } else {
-        int mini = INT_MAX;
-        for (int x : v) {
-            if (x % k == 0) {
-                cout << 0 << '\n';
+    }
+    else{
+        int a = INT_MAX;
+        for(int i=0;i<n;i++){
+            int rem = v[i]%k;
+            if(rem==0){
+                cout<<0<<endl;
                 return;
             }
-            mini = min(mini, k - x % k);
+            a = min(k-rem,a);
         }
-        cout << mini << endl;
+        cout<<a<<endl;
     }
 }
 
