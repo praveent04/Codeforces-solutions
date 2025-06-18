@@ -33,48 +33,23 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
 }
 
 void Solve(){
-        ll n;
-        ll k;
-        cin >> n >> k;
-
-        vector<ll> a(n);
-        cin >> a;
- 
-        ll cnt = 0;
-        vector<ll> v;
- 
-        for (ll i = 0; i <=n-1; ++i) {
-            ll x = a[i];
-            cnt += __builtin_popcountll(x);
-  
-            while (1) {
-                ll c = 1LL << __builtin_ctzll(~x);
-                if (k < c) break;
-                x += c;
-
-                v.push_back(c);
-
-
-            }
+    int n;
+    cin>>n;
+    int cnt=-1;
+    for(int i=1;i<=n/2;i++){
+        int a = i*i;
+        if(a<=n){
+            cnt = a;
         }
-  
-        sort(all(v));
-        for (ll i=0;i<v.size();i++) {
-            if (k < v[i]) 
-            break;
-            
-            cnt++;
-            k -= v[i];
-        }
- 
-        cout << cnt << endl;
-
+    }
+    cout<<cnt<<endl;
+    
 }
 
 int main(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     int test_cases = 1;
-     cin >> test_cases;
+    cin >> test_cases;
     for(int tc = 1; tc <= test_cases; tc++){
         // cout << "Case #" << tc << ": ";
         Solve();

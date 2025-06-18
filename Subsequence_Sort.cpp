@@ -32,14 +32,32 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     return out;
 }
 
+int gcd(int a, int b) {
+    if (b == 0) return a;
+    return gcd(b, a % b);
+}
+
 void Solve(){
+    int x,y;
+    cin>>x>>y;
+    if (gcd(x, y) > 1){cout<<0<<endl; return;}
     
+    for (int j = 1; j <=30; j++) {
+        for (int i = 0; i <= j; i++) {
+            if (gcd(x+i, y + (j-i)) > 1) {
+                cout<<j<<endl;
+                return;
+            }
+        }
+    }
+    
+    cout<<-1<<endl;
 }
 
 int main(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     int test_cases = 1;
-    cin >> test_cases;
+     cin >> test_cases;
     for(int tc = 1; tc <= test_cases; tc++){
         // cout << "Case #" << tc << ": ";
         Solve();

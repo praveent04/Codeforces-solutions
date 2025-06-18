@@ -31,34 +31,41 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     for (const T &x : v) out << x << ' '; 
     return out;
 }
-void print(vector<tuple<int,int,int>>& v){
-    for (auto &tpl : v) {
-    int row, l, r;
-    tie(row, l, r) = tpl;
-    cout << row << " " << l << " " << r << endl;
-}
-}
+
 void Solve(){
-    int n;
-        cin >> n;
-
-        vector<tuple<int, int, int>> v;
-
-        v.emplace_back(1, 1, n);
-
-        for (int i = 2; i < n+1; i++) {
-            
-
-            v.emplace_back(i, 1, n - i + 1);
-
-            if (n - i + 1 + 1 < n+1) {
-                v.emplace_back(i, n - i + 1 + 1, n);
-            }
+    ll n;
+   cin>>n;
+   vector<ll> A(n);
+   cin>>A;
+   vector<ll> B(n);
+   cin>>B;
+   ll maxi = 0, sum = 0;
+        for(ll i = 0; i < n; i++){
+            maxi = max(maxi, A[i]);
+        }
+        for(ll i = 0; i < n; i++){
+            sum += B[i];
         }
 
-        cout << v.size() << endl;
-        print(v);
-        return;
+        ll l = maxi, h = maxi + 2 * sum;
+        while(l < h){
+            ll m = l + ((h - l)/ 2);
+            __int128 O = 0, C = 0;
+            for(int i = 0; i < n; i++){
+                ll a = A[i];
+                ll b = B[i];
+                __int128 d = (__int128)m - a;
+                __int128 u = -1;
+                if(b >= d) u = d ; 
+                else u= b;
+                O += b - u;
+                C += (d - u) / 2;
+            }
+            if(C < O)
+            l = m + 1 ;
+            else h = m;
+        }
+        cout << l << endl;
 }
 
 int main(){
