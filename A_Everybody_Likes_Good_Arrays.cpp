@@ -35,31 +35,19 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
 void Solve(){
     int n;
     cin>>n;
-    int cnt=0;
-    if(n>=100000){
-        cnt += n/100000;
-        cnt+= 45;
+    vector<int> v(n);
+    cin>>v;
+    if(n==1) {
+        cout<<0<<endl;
+        return;
     }
-    else if(n>= 10000){
-        cnt += n/10000;
-        cnt+= 36;
+    int o=0,e=0;
+    for(int i=0;i<n-1;i++){
+        if(v[i]%2==1 && v[i+1]%2==1) o++;
+        if(v[i]%2==0 && v[i+1]%2==0) e++;
     }
-    else if(n>= 1000){
-        cnt += n/1000;
-        cnt+= 27;
-    }
-    else if(n>= 100){
-        cnt += n/100;
-        cnt+= 18;
-    }
-    else if(n>= 10){
-        cnt += n/10;
-        cnt+= 9;
-     }
-    else if(n>=1){
-        cnt+=n;
-     }
-     cout<<cnt<<endl;
+    cout<<o+e<<endl;
+
 }
 
 int main(){

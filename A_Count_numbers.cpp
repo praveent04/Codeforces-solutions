@@ -33,39 +33,28 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
 }
 
 void Solve(){
-    int n;
-    cin>>n;
-    int cnt=0;
-    if(n>=100000){
-        cnt += n/100000;
-        cnt+= 45;
+    int n,q;
+    cin>>n>>q;
+    unordered_map<int,int> mp;
+    for(int i=0;i<q;i++){
+        int x,z;
+        cin>>x>>z;
+        if(x==2){
+            if(mp.find(z)!=mp.end()){
+                cout<<mp[z]<<endl;
+                
+            }else
+            cout<<0<<endl;
+        }
+        else
+        mp[z]++;
     }
-    else if(n>= 10000){
-        cnt += n/10000;
-        cnt+= 36;
-    }
-    else if(n>= 1000){
-        cnt += n/1000;
-        cnt+= 27;
-    }
-    else if(n>= 100){
-        cnt += n/100;
-        cnt+= 18;
-    }
-    else if(n>= 10){
-        cnt += n/10;
-        cnt+= 9;
-     }
-    else if(n>=1){
-        cnt+=n;
-     }
-     cout<<cnt<<endl;
 }
 
 int main(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     int test_cases = 1;
-     cin >> test_cases;
+    //cin >> test_cases;
     for(int tc = 1; tc <= test_cases; tc++){
         // cout << "Case #" << tc << ": ";
         Solve();
