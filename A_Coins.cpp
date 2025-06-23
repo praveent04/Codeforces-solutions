@@ -32,12 +32,18 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     return out;
 }
 
-void Solve() {
-    int n;
-    cin>>n;
-    vector<int> v(n);
-    cin>>v;
-    
+void Solve(){
+    long long n,k;
+    cin>>n>>k;
+    if(n%2==0 || n%k==0){
+        cout<<"YES"<<endl;
+        return;
+    }else{
+        n = n-k;
+        if(n%2==0){cout<<"yes"<<endl;
+        return;}
+    }
+    cout<<"NO"<<endl;
 }
 
 int main(){

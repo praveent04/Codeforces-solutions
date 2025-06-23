@@ -32,20 +32,57 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     return out;
 }
 
-void Solve() {
-    int n;
-    cin>>n;
-    vector<int> v(n);
-    cin>>v;
-    
+ll F[100005], RF[100005];
+
+
+void pre() {
+    F[0] = 1;
+    for (int i = 1; i <= 100004; i++) {
+        F[i] = F[i - 1] * i % Mod;
+    }
+
+    ll r = 1;
+    ll a = F[100005 - 1];
+    ll b = Mod - 2;
+    a %= Mod;
+    while (b) {
+        if (b & 1) r = r * a % Mod;
+        a = a * a % Mod;
+        b >>= 1;
+    }
+
+    RF[100005 - 1] = r;
+    for (int i = 100005 - 2; i >= 0; i--) {
+        RF[i] = RF[i + 1] * (i + 1) % Mod;
+    }
+}
+
+ll comb(ll val, int r) {
+    if (r == 0) return 1;
+    if (r < 0) return 0;
+    ll num = 1;
+    for (int i = 0; i <= r-1; i++) {
+        num = num * ((val - i + Mod) % Mod) % Mod;
+    }
+    return num * RF[r] % Mod;
+}
+
+void Solve(){
+    ll a, b, k;
+    cin >> a >> b >> k;
+
+    ll x = (a - 1) * k + 1;
+    ll res = ((b - 1) * k % Mod * comb(x, a) % Mod + 1) % Mod;
+
+    cout << x % Mod << " " << res << '\n';
 }
 
 int main(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
+    pre();
     int test_cases = 1;
-     cin >> test_cases;
+    cin >> test_cases;
     for(int tc = 1; tc <= test_cases; tc++){
-        // cout << "Case #" << tc << ": ";
         Solve();
     }
     return 0;

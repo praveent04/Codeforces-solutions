@@ -32,18 +32,47 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     return out;
 }
 
-void Solve() {
-    int n;
-    cin>>n;
-    vector<int> v(n);
-    cin>>v;
+
+
+bool Lsh(int l1, int b1, int l2, int b2, int l3, int b3) {
     
+   
+}
+
+void Solve(){
+    int l1, b1, l2, b2, l3, b3;
+    cin >> l1 >> b1 >> l2 >> b2 >> l3 >> b3;
+    if (b1 == b2 && b2 == b3 && l1 + l2 + l3 == b1) {cout << "YES" << endl;
+        return ;}
+    
+    if (l1 == l2 && l2 == l3 && b1 + b2 + b3 == l1) {cout << "YES" << endl;
+    return;}
+
+     int S = max(l1, b1);
+    if ((l1 == S && b2 == b3 && b1 + max(b2, b3) == S && l2 + l3 == S) ||
+        (b1 == S && l2 == l3 && l1 + max(l2, l3) == S && b2 + b3 == S))
+        {cout << "YES" << endl;
+        return;}
+
+    S = max(l2, b2);
+    if ((l2 == S && b1 == b3 && b2 + max(b1, b3) == S && l1 + l3 == S) ||
+        (b2 == S && l1 == l3 && l2 + max(l1, l3) == S && b1 + b3 == S))
+        {cout << "YES" << endl;
+        return;}
+
+    S = max(l3, b3);
+    if ((l3 == S && b1 == b2 && b3 + max(b1, b2) == S && l1 + l2 == S) ||
+        (b3 == S && l1 == l2 && l3 + max(l1, l2) == S && b1 + b2 == S))
+        {cout << "YES" << endl;
+        return;}
+
+        cout << "NO" << endl;
 }
 
 int main(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     int test_cases = 1;
-     cin >> test_cases;
+    cin >> test_cases;
     for(int tc = 1; tc <= test_cases; tc++){
         // cout << "Case #" << tc << ": ";
         Solve();

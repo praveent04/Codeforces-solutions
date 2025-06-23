@@ -32,18 +32,63 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     return out;
 }
 
-void Solve() {
-    int n;
-    cin>>n;
-    vector<int> v(n);
-    cin>>v;
+int solve(const vector<bool>& v, int N) {
+    int cnt = 0;
+    bool in = false;
+    
+    for (int i = 1; i <= N; i++) {
+        if (v[i] && !in) {
+            cnt++;
+            in = true;
+        } else if (!v[i]) {
+            in = false;
+        }
+    }
+    return cnt;
+}
+
+void Solve(){
+    int N, Q;
+    cin >> N >> Q;
+    
+    vector<bool> v(N + 2, false);
+    int in = 0;
+
+    for(int i=1;i<=Q;i++) {
+        int A;
+        cin >> A;
+        bool b = v[A];
+
+        if (b) {
+
+            if (!v[A - 1] && !v[A + 1]) {
+                in -= 1;
+            } else if (v[A - 1] && v[A + 1]) {
+                in += 1;
+            }
+            v[A] = false;
+            cout << in << endl;
+        } else {
+            if (!v[A - 1] && !v[A + 1]) {
+                in += 1;
+            } else if (v[A - 1] && v[A + 1]) {
+                in -= 1;
+            }
+            v[A] = true;
+            cout << in << endl;
+            
+        }
+
+        
+    }
+
     
 }
 
 int main(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     int test_cases = 1;
-     cin >> test_cases;
+    // cin >> test_cases;
     for(int tc = 1; tc <= test_cases; tc++){
         // cout << "Case #" << tc << ": ";
         Solve();

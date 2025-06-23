@@ -32,18 +32,44 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     return out;
 }
 
-void Solve() {
-    int n;
-    cin>>n;
-    vector<int> v(n);
-    cin>>v;
+void Solve(){
+      int n, q;
+    cin >> n >> q;
+
+    vector<shared_ptr<vector<string>>> pc(n + 1, make_shared<vector<string>>());
+    shared_ptr<vector<string>> ans = make_shared<vector<string>>();
+
+    while (q--) {
+        int a, p;
+        cin >> a >> p;
+
+        if (a == 1) {
+            pc[p] = ans;
+        } else if (a == 2) {
+            string s;
+            cin >> s;
+
+            if (!pc[p].unique()) {
+                pc[p] = make_shared<vector<string>>(*pc[p]);
+            }
+
+            pc[p]->emplace_back(move(s));
+        } else if (a == 3) {
+            ans = pc[p];
+        }
+    }
+
+    for (const string &s : *ans) {
+        cout << s;
+    }
+    cout << endl;
     
 }
 
 int main(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     int test_cases = 1;
-     cin >> test_cases;
+    // cin >> test_cases;
     for(int tc = 1; tc <= test_cases; tc++){
         // cout << "Case #" << tc << ": ";
         Solve();

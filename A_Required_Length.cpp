@@ -32,18 +32,29 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     return out;
 }
 
-void Solve() {
-    int n;
-    cin>>n;
-    vector<int> v(n);
-    cin>>v;
-    
+void Solve(){
+    string p;
+    int l;
+    cin>>p>>l;
+    if(p.length()<l){
+        cout<<"No"<<endl;
+        return;
+    }
+    else{
+        for(int i=0;i<p.length();i++){
+            if(p[i] != tolower(p[i])){
+                cout<<"No"<<endl;
+                return;
+            }
+        }
+    }
+    cout<<"Yes"<<endl;
 }
 
 int main(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     int test_cases = 1;
-     cin >> test_cases;
+    // cin >> test_cases;
     for(int tc = 1; tc <= test_cases; tc++){
         // cout << "Case #" << tc << ": ";
         Solve();

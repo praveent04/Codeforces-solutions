@@ -32,12 +32,24 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     return out;
 }
 
-void Solve() {
-    int n;
-    cin>>n;
-    vector<int> v(n);
-    cin>>v;
-    
+void Solve(){
+     int n, s;
+    cin >> n >> s;
+    int ans = 0;
+    int i=0;
+    while(i<n) {
+        i++;
+        int x, y, xx, yy;
+        cin >> x >> y >> xx >> yy;
+
+        if ((xx + yy) % s == 0) {
+                ans++;  
+        } else if(x == y && (xx - yy) % s == 0){
+                ans++;
+        }
+    }
+
+    cout << ans << endl;
 }
 
 int main(){

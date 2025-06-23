@@ -32,12 +32,23 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     return out;
 }
 
-void Solve() {
+void Solve(){
     int n;
     cin>>n;
     vector<int> v(n);
     cin>>v;
-    
+    if(v[0]==v[n-1]){cout<<"NO"<<endl;
+    return;}
+    else{
+        cout<<"YES"<<endl;
+        sort(all(v));
+        reverse(all(v));
+        swap(v[1],v[n-1]);
+        for(auto it: v){
+            cout<<it<<" ";
+        }
+        cout<<endl;
+    }
 }
 
 int main(){

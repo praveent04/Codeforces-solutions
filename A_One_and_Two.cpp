@@ -31,13 +31,28 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     for (const T &x : v) out << x << ' '; 
     return out;
 }
-
-void Solve() {
+// 2 4 4 8 8 16
+// 16 8 4 4 2 2 
+void Solve(){
     int n;
     cin>>n;
-    vector<int> v(n);
+    vector<int>v(n);
     cin>>v;
-    
+    int t=0;
+    for(auto it: v){
+        if(it%2==0)t++;
+    }
+    if(t%2==1){cout<<-1<<endl;
+    return;}
+    else{
+        int a =0;
+        for(int i=0;i<n;i++){
+            if(v[i]%2==0)a++;
+            if(a==t/2){cout<<i+1<<endl;
+            return;}
+        }
+    }
+
 }
 
 int main(){

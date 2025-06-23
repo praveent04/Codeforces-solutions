@@ -32,18 +32,29 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     return out;
 }
 
-void Solve() {
+void Solve(){
     int n;
     cin>>n;
     vector<int> v(n);
-    cin>>v;
-    
+    v[0]=0;
+    for(int i=1;i<=n-1;i++){
+        cin>>v[i];
+    }
+    for(int i=0;i<n;i++){
+        int sum=0;
+        for(int j = i+1;j<n;j++){
+            sum+=v[j];
+            cout<<sum<<" ";
+        }
+        cout<<endl;
+    }
+
 }
 
 int main(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     int test_cases = 1;
-     cin >> test_cases;
+    // cin >> test_cases;
     for(int tc = 1; tc <= test_cases; tc++){
         // cout << "Case #" << tc << ": ";
         Solve();

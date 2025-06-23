@@ -32,12 +32,25 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     return out;
 }
 
-void Solve() {
+int gcd(int a, int b) {
+    if (b == 0) 
+        return a;
+    return gcd(b, a % b);
+}
+
+void Solve(){
     int n;
     cin>>n;
     vector<int> v(n);
     cin>>v;
-    
+    int a = v[0];
+    int b = v[1];
+    int c = gcd(a,b);
+    if(c>2){
+        
+    }else{
+
+    }
 }
 
 int main(){
