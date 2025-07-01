@@ -33,26 +33,32 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
 }
 
 void Solve(){
-     int a, x, y;
-        cin >> a >> x >> y;
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    cin>>a;
+    
+    ll cnt = 0;
+    int maxi = a.back(); 
 
-        int i = abs(a - x);
-        int j = abs(a - y);
-
-        bool f = false;
-
-        for (int j = 1; j <= 100; ++j) {
-            if (j == a) continue;
-
-            if (abs(j - x) < i && abs(j - y) < j) {
-                f = true;
-                break;
+    int k=2;
+    while(k<n) {
+        int i = 0, j = k - 1;
+        
+        while (i < j) {
+            int x = a[i] + a[j]; 
+            int y = a[i] + a[j] + a[k];
+            if ( x > a[k] && y > maxi) {
+                cnt += (j - i);
+                j--;
+            } else {
+                i++;
             }
         }
-
-        if (f) cout << "YES\n";
-        else cout << "NO\n";
-
+        k++;
+    }
+    
+    cout << cnt << endl;
 }
 
 int main(){
