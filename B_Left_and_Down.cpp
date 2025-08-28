@@ -31,28 +31,23 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     for (const T &x : v) out << x << ' '; 
     return out;
 }
-
+ll gcd(ll a, ll b) {
+while (b != 0) {
+ll temp = b;
+b = a % b;
+a = temp;
+}
+return a;
+}
 void Solve(){
-    int n,k;
-    cin>>n>>k;
-    string s;
-    cin>>s;
-    int o =0;
-    for(auto it: s){
-        if(it =='1')o++;
-    }
-   
-    if(o<k+1){
-        cout<<"Alice"<<endl;
-    }
-    else{
-        int a=n/k;
-        if(a>1){
-            cout<<"Bob"<<endl;
-        }else{
-            cout<<"Alice"<<endl;
-        }
-    }
+     ll a, b, k;
+        cin >> a >> b >> k;
+        ll g = gcd(a, b);
+        if (a / g <= k && b / g <= k)
+            cout << 1 << '\n';
+        else
+            cout << 2 << '\n';
+    
 }
 
 int main(){

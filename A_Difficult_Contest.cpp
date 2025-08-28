@@ -33,26 +33,23 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
 }
 
 void Solve(){
-    int n,k;
-    cin>>n>>k;
-    string s;
-    cin>>s;
-    int o =0;
-    for(auto it: s){
-        if(it =='1')o++;
-    }
-   
-    if(o<k+1){
-        cout<<"Alice"<<endl;
-    }
-    else{
-        int a=n/k;
-        if(a>1){
-            cout<<"Bob"<<endl;
-        }else{
-            cout<<"Alice"<<endl;
-        }
-    }
+ string s;
+ cin>>s;
+ int t=0; 
+ for(int i=0;i<s.size();i++){
+    if(s[i]=='T')t++;
+ }
+ string str = "";
+ while(t--){
+    str+='T';
+ }
+ for(int i=0;i<s.size();i++){
+    if(s[i] != 'T')str+=s[i];
+ }
+ for(int i =0;i<str.size();i++){
+    cout<<str[i];
+ }
+ cout<<endl;
 }
 
 int main(){

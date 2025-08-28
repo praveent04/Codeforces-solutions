@@ -31,28 +31,24 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     for (const T &x : v) out << x << ' '; 
     return out;
 }
-
+ 
 void Solve(){
-    int n,k;
-    cin>>n>>k;
-    string s;
-    cin>>s;
-    int o =0;
-    for(auto it: s){
-        if(it =='1')o++;
-    }
-   
-    if(o<k+1){
-        cout<<"Alice"<<endl;
-    }
-    else{
-        int a=n/k;
-        if(a>1){
-            cout<<"Bob"<<endl;
-        }else{
-            cout<<"Alice"<<endl;
+    int a, b, c, d;
+        cin >> a >> b >> c >> d;
+ 
+        bool f = (max(a, b) <= 2 * (min(a, b) + 1));
+
+        int ra = c - a, rb = d - b;
+        
+        bool s = (max(ra, rb) <= 2 * (min(ra, rb) + 1));
+
+        if(f&&s){
+            cout<<"YES";
         }
-    }
+        else{
+            cout<<"NO";
+        }
+        cout<<endl;
 }
 
 int main(){

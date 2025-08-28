@@ -32,35 +32,61 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     return out;
 }
 
+struct D {
+    vector<int> fa;
+    D(int N)   {
+        fa = vector<int>(N+2);
+    for(int i = 0; i < int(fa.size()); ++i)
+        fa[i] = i;
+}
+
+    int get(int x) { return fa[x]==x?x:fa[x]=get(fa[x]); }
+    bool join(int u, int v) {
+        u = get(u); v = get(v);
+        if(u==v) return 0;
+        fa[v]=u; return 1;
+    }
+};
+
 void Solve(){
-    int n,k;
-    cin>>n>>k;
-    string s;
-    cin>>s;
-    int o =0;
-    for(auto it: s){
-        if(it =='1')o++;
+    int n; cin >> n;
+    struct s{ int u, v, d, i; };
+    vector<s> ed(n);
+    int mx = 0;
+    int i=0;
+    while(i<n) {
+        int x, y;
+        cin >> x >> y;
+        ed[i] = {x, y, y-x, i+1};
+        mx = max(mx, max(x, y));
+        i++;
     }
-   
-    if(o<k+1){
-        cout<<"Alice"<<endl;
+    sort(all(ed), [](const s& a, const s& b){ return a.d > b.d; });
+
+    D dsu(mx); 
+    vector<int> res;
+    for(auto &e : ed) {
+        if(dsu.join(e.u, e.v)) res.push_back(e.i);
     }
-    else{
-        int a=n/k;
-        if(a>1){
-            cout<<"Bob"<<endl;
-        }else{
-            cout<<"Alice"<<endl;
-        }
-    }
+    cout << sz(res);
+    cout<<endl;
+    i=0;
+    while(i<sz(res))
+        {cout << res[i] ;
+            if(i+1 == sz(res))
+            cout<<endl;
+            else
+            cout<<' ';
+            i++;
+         }
+         
 }
 
 int main(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
-    int test_cases = 1;
-     cin >> test_cases;
-    for(int tc = 1; tc <= test_cases; tc++){
-        // cout << "Case #" << tc << ": ";
+    int t = 1;
+    cin >> t;
+    for(int _ = 0; _ < t; ++_) {
         Solve();
     }
     return 0;

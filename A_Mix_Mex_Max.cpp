@@ -31,28 +31,26 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     for (const T &x : v) out << x << ' '; 
     return out;
 }
-
-void Solve(){
-    int n,k;
-    cin>>n>>k;
-    string s;
-    cin>>s;
-    int o =0;
-    for(auto it: s){
-        if(it =='1')o++;
+void Solve() {
+    int n;
+    cin >> n;
+    vector<int> v(n);
+    cin >> v;
+    unordered_set<int> v;
+    for (int x : v) {
+        if (x != -1)
+            v.insert(x);
     }
-   
-    if(o<k+1){
-        cout<<"Alice"<<endl;
+    if (v.empty()) {
+        cout << "YES" << endl;
+        return;
     }
-    else{
-        int a=n/k;
-        if(a>1){
-            cout<<"Bob"<<endl;
-        }else{
-            cout<<"Alice"<<endl;
-        }
+    if (v.size() > 1) {
+        cout << "NO" << endl;
+        return;
     }
+    int k = *v.begin();
+    cout << (k > 0 ? "YES" : "NO") << endl;
 }
 
 int main(){

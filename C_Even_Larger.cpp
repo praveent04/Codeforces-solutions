@@ -31,29 +31,52 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     for (const T &x : v) out << x << ' '; 
     return out;
 }
-
 void Solve(){
-    int n,k;
-    cin>>n>>k;
-    string s;
-    cin>>s;
-    int o =0;
-    for(auto it: s){
-        if(it =='1')o++;
+    ll n;
+    cin >> n;
+    vector<ll> a(n);
+    vector<ll> b(n);
+    cin >> a;
+    for (int i = 0; i < n; ++i) {
+        if(i % 2 == 0)
+        b[i] = -a[i] ;
+        else b[i] = a[i];
     }
-   
-    if(o<k+1){
-        cout<<"Alice"<<endl;
-    }
-    else{
-        int a=n/k;
-        if(a>1){
-            cout<<"Bob"<<endl;
-        }else{
-            cout<<"Alice"<<endl;
+
+    vector<ll> S(n, 0);
+    if (n > 0) {
+        S = b;
+        int i=1;
+        while(i<n) {
+            S[i] = S[i - 1] + b[i];
+            i++;
         }
     }
+
+    ll ans = 0,c = 0,p = 0,nxt = 0;  
+    int r=0;
+    while(r<n) {
+        ll b = S[r] + c;
+         
+        ll req = 0;
+        if(r >= 1) req =  nxt ;
+        else req = numeric_limits<ll>::min() / 2;
+ 
+        ans += max(0LL, req - b);
+        c += max(0LL, req - b);
+
+        if (max(0LL, req - b) > 0 && (r % 2 == 1)) {
+            p += max(0LL, req - b);
+        }
+
+        nxt = max(req, p);
+        p = b + max(0LL, req - b);
+        r++;
+    }
+
+    cout << ans <<endl;
 }
+
 
 int main(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);

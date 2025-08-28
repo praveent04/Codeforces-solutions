@@ -32,27 +32,26 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     return out;
 }
 
+ll check(ll n){
+    ll ans=0;
+    for(ll i=1;i<=n;i++){
+        if(i%2 !=0 && i%3 !=0 && i%5 !=0 && i%7 !=0) ans++;
+    }
+    return ans;
+}
 void Solve(){
-    int n,k;
-    cin>>n>>k;
-    string s;
-    cin>>s;
-    int o =0;
-    for(auto it: s){
-        if(it =='1')o++;
-    }
-   
-    if(o<k+1){
-        cout<<"Alice"<<endl;
-    }
-    else{
-        int a=n/k;
-        if(a>1){
-            cout<<"Bob"<<endl;
-        }else{
-            cout<<"Alice"<<endl;
-        }
-    }
+    ll l,r;
+    cin>>l>>r;
+    ll a = check(210);
+
+    ll k1 = r/210;
+    ll rem1 = r%210;
+    ll k2 = (l-1)/210;
+    ll rem2 = (l-1)%210;
+
+    ll x = k1*a + check(rem1);
+    ll y = k2*a + check(rem2);
+    cout<<x-y<<endl;
 }
 
 int main(){

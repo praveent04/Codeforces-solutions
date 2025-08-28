@@ -16,7 +16,9 @@ using namespace std;
 #define ll long long
 #define ull unsigned long long
 #define EPS 1e-9
-constexpr int INF = 1 << 30, Mod = 1e9 + 7;
+constexpr int INF = 1 << 30;
+const int MOD = 998244353;
+const int INV2 = 499122177;
 constexpr ll LINF = 1LL << 62;
 #define PI acos(-1)
 template < typename T = int > using Pair = pair < T, T >;
@@ -33,32 +35,34 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
 }
 
 void Solve(){
-    int n,k;
-    cin>>n>>k;
-    string s;
-    cin>>s;
-    int o =0;
-    for(auto it: s){
-        if(it =='1')o++;
-    }
-   
-    if(o<k+1){
-        cout<<"Alice"<<endl;
-    }
-    else{
-        int a=n/k;
-        if(a>1){
-            cout<<"Bob"<<endl;
-        }else{
-            cout<<"Alice"<<endl;
+     int N;
+        cin >> N;
+        vector<int> v(N);
+        cin>>v;
+        bool f = true;
+        for (auto it:v) {
+            if (it > 1) f = false;
         }
-    }
+
+        int ans;
+        if (!f) {
+            cout<<INV2<<endl;
+            return;
+            
+        } else {
+            if(N%2==1)
+            ans =1;
+            else
+            ans =0;
+              
+        }
+        cout << ans << endl;
 }
 
 int main(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     int test_cases = 1;
-     cin >> test_cases;
+       cin >> test_cases;
     for(int tc = 1; tc <= test_cases; tc++){
         // cout << "Case #" << tc << ": ";
         Solve();

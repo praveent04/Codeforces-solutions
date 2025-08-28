@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
 #define fixed(n) fixed << setprecision(n)
@@ -16,7 +15,7 @@ using namespace std;
 #define ll long long
 #define ull unsigned long long
 #define EPS 1e-9
-constexpr int INF = 1 << 30, Mod = 1e9 + 7;
+constexpr int INF = 1 << 30, Mod = 1000000000LL;
 constexpr ll LINF = 1LL << 62;
 #define PI acos(-1)
 template < typename T = int > using Pair = pair < T, T >;
@@ -32,33 +31,62 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     return out;
 }
 
+inline ll q(char dir, ll s){
+    cout << "?"<<" " ;
+    cout<< dir << " " ;
+    cout<< s << endl << flush;
+    ll ans;
+    if (!(cin >> ans)) exit(0);
+    if (ans == -1) exit(0);
+    return ans;
+}
+
 void Solve(){
-    int n,k;
-    cin>>n>>k;
-    string s;
-    cin>>s;
-    int o =0;
-    for(auto it: s){
-        if(it =='1')o++;
+    int n; cin >> n;
+    vector<ll> X(n), Y(n);
+    for (int i = 0; i < n; ++i) cin >> X[i] >> Y[i];
+
+    ll maxi = LLONG_MIN;
+    ll diff = LLONG_MIN;
+    int i=0;
+    while(i<n){
+        ll a = X[i] + Y[i] ;
+        ll b = X[i] - Y[i];
+        maxi = max(maxi, a);
+        diff = max(diff, b);
+        i++;
     }
-   
-    if(o<k+1){
-        cout<<"Alice"<<endl;
-    }
-    else{
-        int a=n/k;
-        if(a>1){
-            cout<<"Bob"<<endl;
-        }else{
-            cout<<"Alice"<<endl;
-        }
-    }
+
+    const ll s = Mod;
+ 
+    q('R', s);
+    q('R', s);
+    q('U', s);
+    ll rU = q('U', s);
+
+    q('D', s);
+    q('D', s);
+    q('D', s);
+    ll rD = q('D', s);
+
+    maxi = max(maxi,-LINF);
+    diff = max(diff,-LINF);
+
+    ll S1 = rU - 4LL * s + maxi;
+    ll S2 = rD - 4LL * s + diff;
+
+
+    cout << "!"<<" ";
+    cout << (S1 + S2) / 2;
+    cout << " ";
+    cout << (S1 - S2) / 2 ;
+    cout<< endl << flush;
 }
 
 int main(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     int test_cases = 1;
-     cin >> test_cases;
+    cin >> test_cases;
     for(int tc = 1; tc <= test_cases; tc++){
         // cout << "Case #" << tc << ": ";
         Solve();

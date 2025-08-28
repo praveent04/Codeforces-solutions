@@ -32,27 +32,64 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     return out;
 }
 
-void Solve(){
-    int n,k;
-    cin>>n>>k;
-    string s;
-    cin>>s;
-    int o =0;
-    for(auto it: s){
-        if(it =='1')o++;
+
+struct S {
+    int l, r, v;
+    bool operator<(const S &o) const {
+        return (r != o.r ? r < o.r : l < o.l);
     }
+};
+
+void Solve() {
+    int n; cin >> n;
+    vector<int> a(n);
+    cin>>a;
+
+    vector<vector<int>> p(n + 1);
+    int i=0;
+    while(i<n) {if (a[i] <= n) p[a[i]].push_back(i);i++;}
+
+    vector<S> b;
+    i = 1;
+while (i <= n) {
+    auto &x = p[i];
+    int c = sz(x);
+    if (c < i) {
+        i++;        
+        continue;
+    }
+    int j=i;
+    while(j<=c)
+        {b.push_back({x[j - i], x[j - 1], i});j++;}
+    i++;
+}
+
+
+    if (b.empty()) {
+        cout << 0 << endl;
+        return;
+    }
+
+    sort(all(b));
    
-    if(o<k+1){
-        cout<<"Alice"<<endl;
+    vector<int> L(sz(b)), R(sz(b)), W(sz(b));
+    i=0;
+    while(i<sz(b)) {
+        L[i] = b[i].l;
+        R[i] = b[i].r;
+        W[i] = b[i].v;
+        i++;
     }
-    else{
-        int a=n/k;
-        if(a>1){
-            cout<<"Bob"<<endl;
-        }else{
-            cout<<"Alice"<<endl;
-        }
+
+    vector<int> v(sz(b) + 2, 0);
+    i=1;
+    while(i<=sz(b)) {
+        int j = int(lower_bound(all(R), L[i - 1]) - R.begin());
+        v[i] = max(v[i - 1], v[j] + W[i - 1]);
+        i++;
     }
+
+    cout << v[sz(b)] << endl;
 }
 
 int main(){

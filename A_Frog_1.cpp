@@ -32,33 +32,35 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     return out;
 }
 
+int n;
+int arr[100001];
+int dp[100001];
+int rec(int i){
+    if(i==n-1)return 0;
+    int ans =INT_MAX;
+    if(dp[i] !=-1)return dp[i];
+    if(i+1<n){
+        ans =min(ans,abs(arr[i] -arr[i+1]) + rec(i+1)); 
+    }
+    if(i+2<n){
+        ans = min(ans, abs(arr[i] - arr[i+2] )+ rec(i+2));
+    }
+    return dp[i] = ans;
+}
 void Solve(){
-    int n,k;
-    cin>>n>>k;
-    string s;
-    cin>>s;
-    int o =0;
-    for(auto it: s){
-        if(it =='1')o++;
+    
+    cin>>n;
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
     }
-   
-    if(o<k+1){
-        cout<<"Alice"<<endl;
-    }
-    else{
-        int a=n/k;
-        if(a>1){
-            cout<<"Bob"<<endl;
-        }else{
-            cout<<"Alice"<<endl;
-        }
-    }
+    memset(dp,-1,sizeof(dp));
+    cout<<rec(0)<<endl;
 }
 
 int main(){
     ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     int test_cases = 1;
-     cin >> test_cases;
+    // cin >> test_cases;
     for(int tc = 1; tc <= test_cases; tc++){
         // cout << "Case #" << tc << ": ";
         Solve();
