@@ -33,16 +33,23 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
 }
 
 void Solve(){
-    int a,b;
-    cin>>a>>b;
-
-    int cnt=0;
-    while(b>=2&&a>=1){
-        a--;
-        b = b-2;
-        cnt = cnt+3;
+    int n;
+    cin>>n;
+    string s ;
+    cin>>s;
+    for(int i=0;i<n;i++){
+        if(s[i]=='1'){
+            int j=i;
+            while(j<n && s[j]=='1')j++;
+            int len = j-i;
+            if(len<3){
+                cout<<"NO"<<endl;
+                return;
+            }
+            i = j;
+        }
     }
-    cout<<cnt<<endl;
+    cout<<"YES"<<endl;
 }
 
 int main(){
